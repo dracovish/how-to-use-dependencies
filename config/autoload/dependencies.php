@@ -10,6 +10,7 @@ declare(strict_types=1);
  * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
 
+use App\Kernel\Http;
 use App\Middleware;
 use App\Service;
 
@@ -25,4 +26,5 @@ return [
     'AdminUserAuthMiddleware' => function () {
         return make(Middleware\AuthMiddleware::class, ['pool' => 'admin']);
     },
+    Hyperf\HttpServer\CoreMiddleware::class => Http\CoreMiddleware::class,
 ];
