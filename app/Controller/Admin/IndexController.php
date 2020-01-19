@@ -13,15 +13,23 @@ declare(strict_types=1);
 namespace App\Controller\Admin;
 
 use App\Controller\Controller;
+use App\Service\UserAuth;
 use Hyperf\HttpServer\Annotation\AutoController;
 
 /**
- * @AutoController
+ * @AutoController(server="admin", prefix="index")
  */
 class IndexController extends Controller
 {
     public function index()
     {
         return $this->response->success();
+    }
+
+    public function pool()
+    {
+        $user = UserAuth::instance()->getUser();
+
+        return $this->response->success($user->pool);
     }
 }

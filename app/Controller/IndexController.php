@@ -13,6 +13,7 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\Service\DemoService;
+use App\Service\UserAuth;
 use Hyperf\HttpServer\Annotation\AutoController;
 
 /**
@@ -36,5 +37,12 @@ class IndexController extends Controller
         return $this->response->success(
             $this->container->get(DemoService::class)->say()
         );
+    }
+
+    public function pool()
+    {
+        $user = UserAuth::instance()->getUser();
+
+        return $this->response->success($user->pool);
     }
 }
