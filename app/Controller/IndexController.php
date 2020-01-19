@@ -12,6 +12,12 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Service\DemoService;
+use Hyperf\HttpServer\Annotation\AutoController;
+
+/**
+ * @AutoController
+ */
 class IndexController extends Controller
 {
     public function index()
@@ -23,5 +29,12 @@ class IndexController extends Controller
             'method' => $method,
             'message' => 'Hello Hyperf.',
         ]);
+    }
+
+    public function say()
+    {
+        return $this->response->success(
+            $this->container->get(DemoService::class)->say()
+        );
     }
 }
